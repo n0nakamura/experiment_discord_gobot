@@ -6,6 +6,8 @@ link:https://discord.com/developers/applications[Discord Developer Portal — My
 
 == Botの作製
 
+=== 開発環境の導入
+
 Go環境を導入し次のコマンドを実行する。公開しない場合``module_path``は適当でよい。
 
 [source, console]
@@ -14,6 +16,8 @@ go mod init <module_path>
 ----
 
 ここで公式のREADMEでは ``go get github.com/bwmarrin/discordgo`` をするよう書かれているが、link:https://zenn.dev/spiegel/articles/20210223-go-module-aware-mode#go-get-%E3%81%AF%E3%82%AA%E3%83%AF%E3%82%B3%E3%83%B3%EF%BC%9F[Go のモジュール管理【バージョン 1.17 改訂版】] になどに述べられているように、``go get`` は推奨されなくなってきており、ここでは ``go mod tidy`` を使う。
+
+=== ``CLIENT_ID`` と ``TOKEN`` の管理
 
 ``CLIENT_ID`` と ``TOKEN`` の管理は次の方法が考えられる。
 
@@ -24,8 +28,26 @@ go mod init <module_path>
 
 ここではJSONで管理する方法を採用する。
 
+=== 実行
+
 [source, console]
 .``go.mod``, ``go.sum`` の更新
 ----
 go mod tidy
 ----
+
+== 参考
+
+.DiscordGo関係
+link:https://pkg.go.dev/github.com/bwmarrin/discordgo?utm_source=godoc[discordgo package - github.com/bwmarrin/discordgo - Go Packages] +
+link:https://zenn.dev/newt_st21/articles/discordgo-with-heroku[Heroku上でdiscordgoを使ってbotを動かす] +
+link:https://zenn.dev/techstart/articles/5984cac21f589e[【Go】Discordのbotにボタンをつける方法(ERROR： UNION_TYPE_CHOICESでハマった話)] +
+link:https://zenn.dev/cohky/articles/go-discord-bot[GoでDiscordBotを作る] +
+link:https://zenn.dev/techstart/articles/67d6266b27407a[【Go】Discordのbotでメッセージ一覧を取得する] +
+link:https://qiita.com/SEI_Go/items/579fac1d85753cbdc9bc[Go言語で作るDiscordBot（開発環境・クイックスタート・デプロイ・機能集を解説！） - Qiita] +
+link:https://qiita.com/pseuxide/items/e691c878e45235a8a9e2[GoでDiscordの簡易botを作ろう - Qiita] +
+link:https://qiita.com/nikawamikan/items/97c53f40aa70e9254df8[GoでDiscordBotを書きたかった - Qiita] +
+link:https://zenn.dev/saldra/articles/4b4dbca7b8c230[golangを用いたdiscord bot作成入門【DiscordGo】] +
+
+.Discord API関係
+link:https://qiita.com/tan/items/d876fca53615e5dba85b[DiscordのAPIをちょっと触ってみる - Qiita] +
