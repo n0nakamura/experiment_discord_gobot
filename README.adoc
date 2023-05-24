@@ -1,0 +1,31 @@
+= Experimental gobot
+
+== Botの導入
+
+link:https://discord.com/developers/applications[Discord Developer Portal — My Applications] にアクセスし、アプリケーションを作製する。link:https://zenn.dev/newt_st21/articles/discordgo-with-heroku[Heroku上でdiscordgoを使ってbotを動かす] を参考にBotをDiscordサーバに導入する。インターネット上ではOAuth2 URLの生成で、 ``CLIENT_ID`` を手動でURLに書き込む方法を採用している記事が多いが、GUIでクリックするだけでも生成することができる。
+
+== Botの作製
+
+Go環境を導入し次のコマンドを実行する。公開しない場合``module_path``は適当でよい。
+
+[source, console]
+----
+go mod init <module_path>
+----
+
+ここで公式のREADMEでは ``go get github.com/bwmarrin/discordgo`` をするよう書かれているが、link:https://zenn.dev/spiegel/articles/20210223-go-module-aware-mode#go-get-%E3%81%AF%E3%82%AA%E3%83%AF%E3%82%B3%E3%83%B3%EF%BC%9F[Go のモジュール管理【バージョン 1.17 改訂版】] になどに述べられているように、``go get`` は推奨されなくなってきており、ここでは ``go mod tidy`` を使う。
+
+``CLIENT_ID`` と ``TOKEN`` の管理は次の方法が考えられる。
+
+* *標準入力, コマンド引数から読み取る*: 毎回指定するのが面倒。
+* *``.env`` ファイルで管理*: link:https://pkg.go.dev/github.com/joho/godotenv#section-readme[godotenv package - github.com/joho/godotenv - Go Packages] を使う。ある程度使われているパッケージらしい。DiscordGoパッケージを使うインターネットの記事は大体このパッケージを使っている。
+* *環境変数で管理*: 標準ライブラリで処理できる。ただし、実行毎に環境変数に値をセットする必要があるか、もしくはシェルの設定に書き込むという、面倒くさい/セキュリティ的によろしくない管理方法になりそう。
+* *JSONやXMLファイルで管理*: 標準ライブラリで処理できる。
+
+ここではJSONで管理する方法を採用する。
+
+[source, console]
+.``go.mod``, ``go.sum`` の更新
+----
+go mod tidy
+----
